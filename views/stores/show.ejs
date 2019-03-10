@@ -1,0 +1,74 @@
+<% include ../partials/header %>
+<div class="row">
+  <div class="col-md-3">
+    <p class="lead">Easy supply</p>
+    
+  <div class="col-md-9">
+    <div class="thumbnail">
+      <img class="img-responsive" src="<%= store.image %>">
+      <div class="caption-full">
+        <h4 class="pull-right">
+          $<%= store.cost %>for shipping 
+        </h4>
+        <h4><a><%=store.name%></a></h4>
+        <p><%= store.description %></p>
+        <p>
+          <em>Submitted by: <%= store.author.username %>, <%= moment(store.createdAt).fromNow() %></em>
+        </p>
+        <% if(currentUser && store.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+        <div class="well">
+      <div class="text-right">
+        <a class="btn btn-success" href="/stores/<%= store._id %>/products/new">Add New product</a>
+      </div>
+        <a class="btn btn-warning" href="/stores/<%= store._id %>/edit">Edit</a>
+        <form action="/stores/<%= store._id %>?_method=DELETE" method="POST" class="delete-form">
+          <button class="btn btn-danger">Delete</button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+    
+      <hr>
+      <% store.products.forEach(function(product){ %>
+      <div class="row">
+        <div class="col-md-12">
+          <strong><%= product.author.username %></strong>
+          <div>
+           <div class="col-md-9">
+    <div class="thumbnail">
+      <img class="img-responsive" src="<%= product.imagePath %>">
+      <div class="caption-full">
+        <h4 class="pull-right">
+           $<%= product.price %>
+        </h4>
+        <h4><a><%= product.title %></a></h4> 
+        <p><%= product.category %></p>
+        <p><%= product.description %></p>
+                 
+
+           <% if(currentUser && product.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+            <div class="pull-right">
+              <a href="/stores/<%=store._id%>/products/<%= product._id%>/edit" class="btn btn-xs btn-warning">EDIT</a>
+              <form class="delete-form" action="/stores/<%= store._id%>/products/<%= product._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-xs btn-danger">DELETE</button>
+              </form>
+            </div>
+          <% } %>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+   
+</div>
+</div>
+<script>
+    var contentString = `
+      <strong><%= store.name %><br />
+      <%= store.location %></strong>
+      <p><%= store.description %></p>
+   
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkG51lwJtDvYFKTBdRZlhzYg1D4QFsXPU&callback=initMap"></script>
+<% include ../partials/footer %>
