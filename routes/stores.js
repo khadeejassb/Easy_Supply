@@ -4,8 +4,7 @@ var Store = require("../models/store");
 var Product = require("../models/product");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
-var geocoder = require('geocoder');
-var { isLoggedIn, checkUserStore, checkUserProduct, isAdmin } = middleware; // destructuring assignment
+var { isLoggedIn, checkUserStore, checkUserProduct,checkUserComment, isAdmin } = middleware; // destructuring assignment
 
 // Define escapeRegex function for search feature
 function escapeRegex(text) {
@@ -40,8 +39,9 @@ router.get("/", function(req, res){
   }
 });
 
-//CREATE - add new Store to DB
+//CREATE - add new store to DB
 router.post("/", isLoggedIn, function(req, res){
+  // get data from form and add to stores array
   // get data from form and add to Stores array
   var name = req.body.name;
   var image = req.body.image;
@@ -51,67 +51,51 @@ router.post("/", isLoggedIn, function(req, res){
       username: req.user.username
   }
   var cost = req.body.cost;
-  geocoder.geocode(req.body.location, function (err, data) {
-    if (err || data.status === 'ZERO_RESULTS') {
-      req.flash('error', 'Invalid address');
-      return res.redirect('back');
-    }
-    var location = req.body.location;
-    var newStore = {name: name, image: image, description: desc, cost: cost, author:author, location: location};
+  var location = req.body.location;
+     var newStore = {name: name, image: image, description: desc, cost: cost, author:author, location: location};
     // Create a new Store and save to DB
     Store.create(newStore, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
-            //redirect back to Stores page
+            //redirect back to stores page
             console.log(newlyCreated);
             res.redirect("/stores");
         }
     });
   });
-});
+
 
 //NEW - show form to create new store
 router.get("/new", isLoggedIn, function(req, res){
    res.render("stores/new"); 
 });
-
+ 
 // SHOW - shows more info about one store
 router.get("/:id", function(req, res){
     //find the store with provided ID
-    Store.findById(req.params.id).populate("products").exec(function(err, foundStore){
+    Store.findById(req.params.id).populate("products").populate("comments").exec(function(err, foundStore){
         if(err || !foundStore){
             console.log(err);
             req.flash('error', 'Sorry, that store does not exist!');
             return res.redirect('/stores');
         }
-        console.log(foundStore);
-        //render show template with that Store
+        console.log(foundStore)
+        //render show template with that store
         res.render("stores/show", {store: foundStore});
-    });
-    
-     Store.findById(req.params.id).populate("products").exec(function(err, foundStore){
-        if(err || !foundStore){
-            console.log(err);
-            req.flash('error', 'Sorry, that store does not exist!');
-            return res.redirect('/stores');
-        }
-        console.log(foundStore);
-        //render show template with that Store
-        res.render("stores/show", {store: foundStore});
+       
     });
 });
 
-// EDIT - shows edit form for a Store
+// EDIT - shows edit form for a store
 router.get("/:id/edit", isLoggedIn, checkUserStore, function(req, res){
-  //render edit template with that Store
+  //render edit template with that store
   res.render("stores/edit", {store: req.store});
 });
 
 // PUT - updates store in the database
-router.put("/:id",function(req, res){
-  geocoder.geocode(req.body.location, function (err, data) {
-    var newData = {name: req.body.name, image: req.body.image, description: req.body.description, cost: req.body.cost, location:req.body.location};
+router.put("/:id", function(req, res){
+    var newData = {name: req.body.name, image: req.body.image, description: req.body.description, cost: req.body.cost, location: req.body.location};
     Store.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, store){
         if(err){
             req.flash("error", err.message);
@@ -121,7 +105,7 @@ router.put("/:id",function(req, res){
             res.redirect("/stores/" + store._id);
         }
     });
-  });
+  
 });
 
 // DELETE - removes store and its products from the database
@@ -129,8 +113,9 @@ router.delete("/:id", isLoggedIn, checkUserStore, function(req, res) {
     Product.remove({
       _id: {
         $in: req.store.products
-      },
-    },function(err) {
+      }
+    },
+   function(err) {
       if(err) {
           req.flash('error', err.message);
           res.redirect('/');
@@ -145,26 +130,6 @@ router.delete("/:id", isLoggedIn, checkUserStore, function(req, res) {
           });
       }
     })
-    /*Comment.remove({
-      _id: {
-        $in: req.store.comments
-      }
-    },function(err) {
-      if(err) {
-          req.flash('error', err.message);
-          res.redirect('/');
-      } else {
-          req.store.remove(function(err) {
-            if(err) {
-                req.flash('error', err.message);
-                return res.redirect('/');
-            }
-            req.flash('error', 'Store deleted!');
-            res.redirect('/stores');
-          });
-      }
-    })*/
-    
 });
 
 module.exports = router;

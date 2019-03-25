@@ -6,7 +6,6 @@ var storeSchema = new mongoose.Schema({
    description: String,
    cost: Number,
    location: String,
-   createdAt: { type: Date, default: Date.now },
    author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,
@@ -26,6 +25,7 @@ var storeSchema = new mongoose.Schema({
          ref: "Comment"
       }
    ]
+  
 });
 
 module.exports = mongoose.model("Store", storeSchema);

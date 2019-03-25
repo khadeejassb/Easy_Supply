@@ -7,6 +7,7 @@ var express     = require("express"),
     LocalStrategy = require("passport-local"),
     flash        = require("connect-flash"),
     Store  = require("./models/store"),
+    Cart  = require("./models/cart"),
     Product  = require("./models/product"),
    Comment     = require("./models/comment"),
     User        = require("./models/user"),
@@ -20,10 +21,11 @@ require('dotenv').load();
 //requiring routes
 var productRoutes    = require("./routes/products"),
     storeRoutes = require("./routes/stores"),
-  /* commentRoutes    = require("./routes/comments"),*/
+    cartRoutes = require("./routes/cart"),
+   commentRoutes    = require("./routes/comments"),
     indexRoutes      = require("./routes/index")
     
-mongoose.connect('mongodb://localhost:27017/Easy_supply')
+mongoose.connect('mongodb://localhost:27017/Easy_supply1')
     
 // assign mongoose promise library and connect to database
 /*mongoose.Promise = global.Promise;
@@ -67,8 +69,9 @@ app.use(function(req, res, next){
 
 app.use("/", indexRoutes);
 app.use("/stores", storeRoutes);
+app.use("/cart", cartRoutes);
 app.use("/stores/:id/products", productRoutes);
-/*app.use("/stores/:id/comments", commentRoutes);*/
+app.use("/stores/:id/comments", commentRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
