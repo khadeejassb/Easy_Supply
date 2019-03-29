@@ -1,0 +1,29 @@
+<% include ./partials/header %>
+    <div class="row">
+        <h1 style="text-align: center">Edit your information</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/<%= user._id%>?_method=PUT" method="post">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input class="form-control" type="mailto" name="email" value= "<%=user.email%>">
+                </div> <div class="form-group">
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input class="form-control" type="text" name="username" value= "<%=user.username%>">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input class="form-control" type="password" name="password" value= "<%=user.password%>">
+                </div>
+                 <div class="form-group">
+                     <label>Phone:</label>
+                    <input class="form-control" type="text" name="phone" value= "<%=user.phone%>">
+                </div>
+                   <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/">Go Back</a>
+        </div>
+    </div>
+<% include ./partials/footer %>

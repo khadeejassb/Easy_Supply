@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+<div class="row">
+        <div class="col-md-12">
+          <strong><%= product.author.username %></strong>
+    
+<div class='container'>
+	<div class='row'>
+	<!-- we are going to have 3 spaces for image white space and pprice -->
+	 <div class='col-md-4'>
+		<img src="<%=  product.imagePath %>" alt="">
+	
+	</div>
+	<div class='col-md-4'>
+<!-- this is where the actual purchase information will happen  -->
+<!-- 52 -->
+
+	</div>
+	<div class='col-md-4'>
+	  <h4 class="pull-right">
+        <p><%= product.category %></p>
+        <p><%= product.description %></p>
+	
+		<div class="form-group">
+		<input type="hidden" name= "product._id" id="quantity" value="<%= product._id %>">
+		<input type="hidden" name= "priceHidden" id="priceHidden" value="<%= product.price %>">
+
+		<input type="text" name="item" class="form-control" value="<%= product.title %>">
+		<input type="text" name="priceValue" id= "priceValue" class="form-control" value="<%= product.price %>">
+		</div>
+    <form method="post"action="/cart/<%= product._id %>">
+		<% if (currentUser) { %>
+			<button type="submit" class="btn btn-primary btn-lg"> Add to Cart </button>
+		<% } else { %>
+			<a href="/register" class=btn btn-warning btn-lg">Signup to begin Buying"></a> 
+		<% } %>
+
+	</form>
+	</div>
+  </div>
+</div>
+       
+
+<% include ../partials/footer %>

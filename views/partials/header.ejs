@@ -25,16 +25,21 @@
             <ul class="nav navbar-nav">
               <li class="<%= typeof page !== 'undefined' && page === 'stores' ? 'active' : '' %>"><a href="/stores">Home</a></li>
             </ul>
+            <ul class="nav navbar-nav">
+                 <% if( currentUser && currentUser.isAdmin){ %>
+              <li><a href="/admin">Dashbord</a></li>
+              <% } %>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
              
                 <% if(!currentUser){ %>
                     <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
                     <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
                 <% } else { %>
-                    <li><a href="#">Signed In As <%= currentUser.username %></a></li>
+                    <li><a href="/profile">Signed In As <%= currentUser.username %></a></li>
                     <li><a href="/logout">Logout</a></li>
                 <% } %>
-                 <li><a href="/shopping-cart">
+                 <li><a href="/cart">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
                     <span class="badge"><session.cart.totalQty</span>
                 </a></li>

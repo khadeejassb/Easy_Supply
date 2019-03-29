@@ -1,0 +1,27 @@
+
+
+<% include ./partials/header %>
+    <div class="row">
+        <h1 style="text-align: center">Edit your information</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/profile<%= user._id%>" method="post">
+                <div class="form-group">
+                    <label>Email:</label> <%=user.email%>
+                </div> <div class="form-group">
+                <div class="form-group">
+                    <label>Username:</label> <%=user.username%>
+                </div>
+                 <div class="form-group">
+                     <label>Phone:</label> <%=user.phone%>
+                </div>
+                <div class="form-group">
+                    </div>
+                      <a class="btn btn-warning" href="/<%= user._id %>/edit">Edit</a>
+                </div>
+            </form>
+            <a href="/stores">Go Back</a>
+        </div>
+    </div>
+<% include ./partials/footer %>
+
+     

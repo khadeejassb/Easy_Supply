@@ -2,8 +2,9 @@ const express = require("express");
 const router  = express.Router({mergeParams: true});
 const Store = require("../models/store");
 const Product = require("../models/product");
+const Cart = require("../models/cart");
 const middleware = require("../middleware");
-const { isLoggedIn, checkUserProduct, isAdmin } = middleware;
+const { isLoggedIn, checkUserProduct, isAdmin, MyCart } = middleware;
 
 //Products New
 router.get("/new", isLoggedIn, function(req, res){
@@ -45,7 +46,22 @@ router.post("/", isLoggedIn, function(req, res){
        }
    });
 });
-
+//show detailes
+router.get("/:productId/show", function(req, res){
+    //find the product with provided ID
+    Product.findById(req.params.productId).exec(function(err, foundProduct){
+        if(err || !foundProduct){
+            console.log(err);
+            req.flash('error', 'Sorry, that Product does not exist!');
+            return res.redirect('/stores');
+        }
+        console.log(foundProduct)
+        //render show template with that Product
+        res.render("products/show", {product: foundProduct});
+       
+    });
+});
+// edit route
 router.get("/:productId/edit", isLoggedIn, checkUserProduct, function(req, res){
   res.render("products/edit", {store_id: req.params.id, product: req.product});
 });
@@ -60,7 +76,7 @@ router.put("/:productId", isAdmin, function(req, res){
        }
    }); 
 });
-
+// delete route
 router.delete("/:productId", isLoggedIn, checkUserProduct, function(req, res){
   // find store, remove Product from Products array, delete Product in db
   Store.findByIdAndUpdate(req.params.id, {

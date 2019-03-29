@@ -1,6 +1,7 @@
 var Product = require('../models/product');
 var Store = require('../models/store');
 var Comment = require('../models/comment');
+var Cart = require('../models/cart');
 module.exports = {
   isLoggedIn: function(req, res, next){
       if(req.isAuthenticated()){
@@ -62,4 +63,25 @@ module.exports = {
       res.redirect('back');
     }
   },
-}
+ cartLength: function(req, res, next) {
+   if (req.user){
+   var total = 0;
+   Cart.findOne({ owner: req.user._id }, function(err, cart){
+    if(cart){
+      for (var i = 0; i < cart.items.length; i++) {
+        total += cart.items[i].quantity;
+      }
+      // locals refers to local variable
+      res.locals.cart = total;
+    } else {
+      res.locals.cart = 0;
+    }
+    next(); 
+    });  
+  } else {
+    next();
+    }
+   
+ }
+  };
+  

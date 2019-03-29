@@ -1,0 +1,32 @@
+<% include ./partials/header %>
+	<div class="row">
+	<div class="large-12 columns">
+	<h2>Shopping Cart <span><a href="/cart/remove">Empty Cart</a></span></h2>
+	<% if(cart.items){ %>
+	<table>
+		  <thead>
+		    <tr>
+		      <th width="650">Item</th>
+		      <th width="100">Quantity</th>
+		      <th width="100">Total</th>
+		      <th width="100"></th>				  
+		  </thead>
+		  <tbody>			 
+			  	<%=cart.items %>
+			  		<tr>
+				     
+				      <td><%= cart.qty %></td>
+				      <td>$<%= cart.price * cart.qty %></td>
+				    </tr>
+		  </tbody>
+		</table>
+	<% } else { %>
+		<p>There are no items in your cart</p>
+	<% } %>
+	</div>
+	</div>
+<div class="row">
+		<div class="large-6 columns">
+			<h4>Total: <strong>$<%= cart.total %> </strong></h4>
+		</div>
+<% include ./partials/footer %>
