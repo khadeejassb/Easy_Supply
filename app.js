@@ -22,13 +22,8 @@ require('dotenv').load();
 //requiring routes
 var productRoutes    = require("./routes/products"),
     storeRoutes = require("./routes/stores"),
-<<<<<<< HEAD
-   commentRoutes    = require("./routes/comments"),
-   cartRoutes    = require("./routes/cart"),
-=======
     cartRoutes = require("./routes/cart"),
    commentRoutes    = require("./routes/comments"),
->>>>>>> 2a19f6cec8c565c587a28f9a347a40838d87a61a
     indexRoutes      = require("./routes/index")
     
 mongoose.connect('mongodb://localhost:27017/Easy_supply1')
@@ -75,12 +70,8 @@ app.use(function(req, res, next){
 
 app.use("/", indexRoutes);
 app.use("/stores", storeRoutes);
-app.use("/cart", cartRoutes);
 app.use("/stores/:id/products", productRoutes);
-<<<<<<< HEAD
 app.use("/", cartRoutes);
-=======
->>>>>>> 2a19f6cec8c565c587a28f9a347a40838d87a61a
 app.use("/stores/:id/comments", commentRoutes);
 
 

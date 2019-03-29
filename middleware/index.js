@@ -1,13 +1,9 @@
 var Product = require('../models/product');
 var Store = require('../models/store');
 var Comment = require('../models/comment');
-<<<<<<< HEAD
-var Cart = require('../models/cart');
-=======
 var User = require('../models/user');
 var Cart = require('../models/cart');
 
->>>>>>> 2a19f6cec8c565c587a28f9a347a40838d87a61a
 module.exports = {
   isLoggedIn: function(req, res, next){
       if(req.isAuthenticated()){
@@ -69,32 +65,8 @@ module.exports = {
       res.redirect('back');
     }
   },
-<<<<<<< HEAD
  cartLength: function(req, res, next) {
    if (req.user){
-=======
-isSeller: function(req, res, next) {
-    if(req.user.seller) {
-      next();
-    } else {
-      req.flash('error');
-      res.redirect('back');
-    }
-},
-isCustumer: function(req, res, next) {
-    if(req.user.customer) {
-      next();
-    } else {
-      req.flash('error');
-      res.redirect('back');
-    }
-},
-
-
-MyCart: function (req, res, next){
-
-  if (req.user){
->>>>>>> 2a19f6cec8c565c587a28f9a347a40838d87a61a
    var total = 0;
    Cart.findOne({ owner: req.user._id }, function(err, cart){
     if(cart){
@@ -110,14 +82,8 @@ MyCart: function (req, res, next){
     });  
   } else {
     next();
-<<<<<<< HEAD
     }
    
  }
   };
   
-=======
-   }
-}
-}
->>>>>>> 2a19f6cec8c565c587a28f9a347a40838d87a61a
