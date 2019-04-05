@@ -1,7 +1,6 @@
 {
   "name": "easy_supply",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -28,5 +27,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "khadija",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khadeejassb/Easy_Supply.git"
+  },
+  "bugs": {
+    "url": "https://github.com/khadeejassb/Easy_Supply/issues"
+  },
+  "homepage": "https://github.com/khadeejassb/Easy_Supply#readme",
+  "description": ""
 }

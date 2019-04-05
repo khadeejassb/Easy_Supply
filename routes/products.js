@@ -2,9 +2,8 @@ const express = require("express");
 const router  = express.Router({mergeParams: true});
 const Store = require("../models/store");
 const Product = require("../models/product");
-const Cart = require("../models/cart");
 const middleware = require("../middleware");
-const { isLoggedIn, checkUserProduct, isAdmin, MyCart } = middleware;
+const { isLoggedIn, checkUserProduct, isAdmin } = middleware;
 
 //Products New
 router.get("/new", isLoggedIn, function(req, res){

@@ -2,10 +2,11 @@
 
      <header class="jumbotron">
          <div class="container">
-             <h1><span class="glyphicon glyphicon-home"></span> Welcome To Easy supply!</h1>
-             <p>Shop Smart, Save Big!</p>
+             <h1>Shop Smart, Save Big!</h1>
              <p>
+                  <% if( currentUser && currentUser.isAdmin){ %>
                 <a class="btn btn-primary btn-lg" href="/stores/new">Add New store</a>
+                <% } %>
              </p>
               <form action="/stores" method="GET" class="form-inline" id="store-search">
                 <div class="form-group">
@@ -19,7 +20,7 @@
         <% stores.forEach(function(store){ %>
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
-                   <img src="<%= store.image %>">
+                   <img src="<%= store.image %>"> 
                    <div class="caption">
                        <h4><%= store.name %></h4>
                    </div>

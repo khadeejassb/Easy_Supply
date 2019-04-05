@@ -6,10 +6,12 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>EasySupply</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" >
       <link rel="stylesheet" href="/stylesheets/main.css">
   </head>
   <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-dark bg-dark">
+  
       <div class="container">
           <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -28,20 +30,21 @@
             <ul class="nav navbar-nav">
                  <% if( currentUser && currentUser.isAdmin){ %>
               <li><a href="/admin">Dashbord</a></li>
+               <li><a href="/order">order</a></li>
               <% } %>
             </ul>
             <ul class="nav navbar-nav navbar-right">
              
                 <% if(!currentUser){ %>
-                    <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
-                    <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
+                    <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %> "><a href="/login" > Login</a></li>
+                    <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register" class=" "></i> Sign Up</a></li>
                 <% } else { %>
                     <li><a href="/profile">Signed In As <%= currentUser.username %></a></li>
                     <li><a href="/logout">Logout</a></li>
                 <% } %>
                  <li><a href="/cart">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
-                    <span class="badge"><session.cart.totalQty</span>
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    
                 </a></li>
             </ul>
           </div>
@@ -57,4 +60,4 @@
        <div class="alert alert-success"><p><%= success %></p></div>
      <% } %>
   </div>
-  <div class="container">
+  

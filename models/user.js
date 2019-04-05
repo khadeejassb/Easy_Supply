@@ -27,7 +27,7 @@ var UserSchema = new mongoose.Schema({
             message: 'This is not a valid phone number'
         }
     },
-    password: String,
+    password:{type: String, required: true},
   stores: [
       {
          type: mongoose.Schema.Types.ObjectId,

@@ -1,10 +1,19 @@
 <% include ./partials/header %>
     <div class="row">
-        <h1 style="text-align: center">Add sale requeste</h1>
+        <h1 style="text-align: center">orders</h1>
         <div style="width: 30%; margin: 25px auto;">
-            <form action="/admin" method="POST">
+            <form action="/order" method="POST">
                 <div class="form-group">
-                    <p>this user wants to become a seler</p>
+                    <p>you got some orders requestes !</p>
+                    <% if (order._id){ %>
+                        <%= order.name %>
+                         <%= order.address %>
+                        <%= order.postlcode %>
+                        <%= order.phone %><br>
+                        <%= order.cart %>    
+                       
+                    
+                    <% } %>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Accept</button>

@@ -1,7 +1,7 @@
 <% include ./partials/header %>
-	<div class="row">
-	<div class="large-12 columns">
-	<h2>Shopping Cart <span><a href="/cart/remove">Empty Cart</a></span></h2>
+	<div class="row table1">
+	<div class="col-lg-12"> 
+	<h2>Shopping Cart <span><a href="/remove">Empty Cart</a></span></h2>
 	<% if(cart.items){ %>
 	<table>
 		  <thead>
@@ -12,21 +12,31 @@
 		      <th width="100"></th>				  
 		  </thead>
 		  <tbody>			 
-			  	<%=cart.items %>
+			  	<% cart.items.forEach(function(cart){ %>
 			  		<tr>
-				     
+				     <td><%= cart.title %></td>
 				      <td><%= cart.qty %></td>
 				      <td>$<%= cart.price * cart.qty %></td>
 				    </tr>
+				    <% }); %>
 		  </tbody>
 		</table>
+		</div>
+		</div>
+		 <hr>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+        </div>
 	<% } else { %>
 		<p>There are no items in your cart</p>
 	<% } %>
 	</div>
-	</div>
+
+</div>
 <div class="row">
-		<div class="large-6 columns">
+		<div class="col-lg-6">
 			<h4>Total: <strong>$<%= cart.total %> </strong></h4>
+		</div>
 		</div>
 <% include ./partials/footer %>

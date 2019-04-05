@@ -1,0 +1,30 @@
+<% include ./partials/header %>
+    <div class="row">
+        <h1 style="text-align: center">Checkout</h1>
+        <div style="width: 30%; margin: 25px auto;">
+           <form action="/checkout" method="post" id="checkout-form">
+                <div class="form-group">
+                    <label>name:</label>
+                    <input class="form-control" type="text" name="name" >
+                </div> <div class="form-group">
+                <div class="form-group">
+                    <label>Address:</label>
+                    <input class="form-control" type="text" required name="address" >
+                </div>
+                <div class="form-group">
+                    <label>Postlcode:</label>
+                    <input class="form-control" type="text" required name="postlcode">
+                </div>
+                 <div class="form-group">
+                     <label>Phone:</label>
+                    <input class="form-control" type="text"required name="phonenumber" placeholder="055 555 5555">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Checkout!</button>
+                </div>
+            </form>
+            <a href="/stores">Go Back</a>
+        </div>
+    </div>
+<% include ./partials/footer %>
+

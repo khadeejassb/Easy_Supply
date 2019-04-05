@@ -7,10 +7,9 @@ var express     = require("express"),
     LocalStrategy = require("passport-local"),
     flash        = require("connect-flash"),
     Store  = require("./models/store"),
-    Cart  = require("./models/cart"),
     Product  = require("./models/product"),
    Comment     = require("./models/comment"),
-    Cart     = require("./models/cart"),
+    Order     = require("./models/order"),
     User        = require("./models/user"),
     session = require("express-session"),
     MongoStore = require("connect-mongo")(session),
@@ -24,7 +23,8 @@ var productRoutes    = require("./routes/products"),
     storeRoutes = require("./routes/stores"),
     cartRoutes = require("./routes/cart"),
    commentRoutes    = require("./routes/comments"),
-    indexRoutes      = require("./routes/index")
+    orderRoutes    = require("./routes/orders"),
+    indexRoutes      = require("./routes/index");
     
 mongoose.connect('mongodb://localhost:27017/Easy_supply1')
     
@@ -48,7 +48,7 @@ app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "Once again Rusty wins cutest dog!",
+    secret: "khadija!",
     resave: false,
     saveUninitialized: false
 }));
@@ -72,6 +72,7 @@ app.use("/", indexRoutes);
 app.use("/stores", storeRoutes);
 app.use("/stores/:id/products", productRoutes);
 app.use("/", cartRoutes);
+app.use("/", orderRoutes);
 app.use("/stores/:id/comments", commentRoutes);
 
 

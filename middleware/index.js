@@ -2,7 +2,7 @@ var Product = require('../models/product');
 var Store = require('../models/store');
 var Comment = require('../models/comment');
 var User = require('../models/user');
-var Cart = require('../models/cart');
+var Order = require('../models/order');
 
 module.exports = {
   isLoggedIn: function(req, res, next){

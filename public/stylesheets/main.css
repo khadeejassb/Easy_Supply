@@ -6,8 +6,25 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 0px;
+ 
 }
+.jumbotron {
+background-color:white; 
+}
+.table1 {
+  
+  padding: 30px;
+  margin-left: 30px;
+}
+.navbar{
+  background-color: #2c3e50;
+}
+.navbar  a {
+  color: white;
+  
+}
+
 /***** Footer *****/
 .footer {
   position: absolute;
@@ -15,48 +32,58 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+ 
 }
-.footer-top { padding: 60px 0 40px 0; text-align: left; }
-.footer-top h3 { padding-bottom: 10px; }
+
+footer h3 {
+  color: #718093;
+}
 
 .footer-contact p { word-wrap: break-word; }
 .footer-contact i { padding-right: 10px; font-size: 18px; color: #ddd; }
 .footer-contact p a { border-bottom: 1px dashed #ccc; }
 .footer-contact p a:hover, .footer-contact p a:focus { border-bottom: 1px dashed #856dc0; }
-
-.footer-links a { color: #888; border: 0; }
+.footer-contact{ color: #bdc3c7;}
+.footer-links a { color: #bdc3c7; border: 0; }
 .footer-links a:hover, .footer-links a:focus { color: #555; margin-left: 3px; }
-
+.footer-links{color: #bdc3c7;}
 .footer-bottom { padding: 0 0 60px 0; }
 
 .footer-social a { margin: 0 10px; color: #bbb; border: 0; }
-.footer-social a:hover, .footer-social a:focus { color: #856dc0; border: 0; }
+.footer-social a:hover, .footer-social a:focus { color: #; border: 0; }
 .footer-social i { font-size: 24px; vertical-align: middle; }
 
-
+.footer-all{
+  background-color: #2c3e50;
+  padding-top: 30px;
+  margin-bottom: 0;
+  
+}
+.footer-about{
+  color: #bdc3c7;
+}
 .container .text-muted {
+  
   margin: 20px 0;
+      
+  
 }
 
 /* Thumbnail styles */
 .thumbnail img {
-    width: 100%;
+    width: 30%;
+    height: 50%;
 }
 
 .thumbnail {
-    padding: 0;
+    padding: 2px;
 }
 
 .thumbnail .caption-full {
     padding: 9px;
 }
 
-/* Google Map styles */
-#map {
-	height: 400px;
-	width: 100%;
-}
+
 .add-to-cart-form {
 	display: inline-block;
 }
@@ -69,4 +96,17 @@ body {
 .flex-wrap {
   display:flex;
   flex-wrap: wrap;
+}
+
+
+.btn-primary{
+  background-color: #2c3e50;
+}
+
+.prod{
+  color: blue ;
+}
+.comm{
+  
+     padding: 70px !important; 
 }

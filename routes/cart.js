@@ -1,11 +1,6 @@
 var express = require("express");
 var router  = express.Router();
-var passport = require("passport");
-var User = require("../models/user");
-var Store = require("../models/store");
 var Product = require("../models/product");
-var Comment = require("../models/comment");
-var Cart = require('../models/cart');
 var middleware = require("../middleware");
 var { isLoggedIn, checkUserStore, checkUserProduct,checkUserComment, isAdmin ,cartLength } = middleware; // destructuring assignment
 
@@ -27,27 +22,34 @@ router.get('/cart', function(req, res){
 		res.render('cart', {cart: displayCart });
 	});
 
-	router.post('cart/:id', function(req, res){
-		var cart = req.params.cart;
+router.post('/cart/:id', function(req, res){
+	req.session.cart = req.session.cart || {};
+	var cart = req.session.cart;
+	Product.findOne({_id:req.params.id}, function(err, product){
+		if(err){
+			console.log(err);
+		}
 
-		Product.findOne({_id:req.params.id}, function(err, product){
-			if(err){
-				console.log(err);
-			}
-
-			if(cart[req.params.id]){
-				cart[req.params.id].qty++
-			} else {
-				cart[req.params.id] = {
-					item: product._id,
-					title: product.title,
-					price: product.price,
-					qty: 1
-				}
-			}
-
-			res.redirect('cart');
-		});
+		if(cart[req.params.id]){
+			cart[req.params.id].qty++;
+		} else {
+			cart[req.params.id] = {
+				item: product._id,
+				title: product.title,
+				price: product.price,
+				qty: 12
+			};
+		}
+	res.redirect('/cart');
 	});
+});
+
+router.get('/remove', function(req, res, next) {
+
+  	delete req.session.cart; 
+
+    res.redirect('/cart');
+});
+
 
 module.exports = router;

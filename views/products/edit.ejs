@@ -3,7 +3,7 @@
         <h1 style="text-align: center">Edit Product</h1>
         <div style="width: 30%; margin: 25px auto;">
             <form action="/stores/<%=store_id %>/products/<%=product._id %>?_method=PUT" method="POST">
-                    
+                   <div class="form-group"> 
                     <label for="name">category</label>
                     <input class="form-control" type="text"value="<%=product.category%>" name="product[category]" placeholder="food,books..etc">
                 </div>
